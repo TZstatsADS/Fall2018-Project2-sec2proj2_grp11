@@ -1,3 +1,4 @@
+# install.packages(c("choroplethr", "choroplethrZip", "leaflet", "maps", "ragal"))
 library(shiny)
 library(choroplethr)
 library(choroplethrZip)
