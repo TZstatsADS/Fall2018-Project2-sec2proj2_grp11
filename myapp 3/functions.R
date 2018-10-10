@@ -1,11 +1,11 @@
 # Load Data
-combine_data <- function(firstFileName = 'data_20160110.csv'){
+combine_data <- function(firstFileName = '../data/data_20160110.csv'){
   filenames <- c()
   newdata <- fread(firstFileName)
   idx <- seq(4,9,1)
   
   for (i in 1:length(idx)){
-    filenames[i] <- paste(paste('data_2016010', idx[i], sep = ''), '.csv', sep = '')
+    filenames[i] <- paste(paste('../data/data_2016010', idx[i], sep = ''), '.csv', sep = '')
     newdata = rbind(newdata, fread(filenames[i]))
   }
   newdata <- newdata[order(newdata$tpep_pickup_datetime), ]
@@ -23,8 +23,7 @@ get_route <- function(pickupAddress, dropoffAddress){
   origin = c(pickupAddress[1], pickupAddress[2])
   destination = c(dropoffAddress[1],dropoffAddress[2])
   
-  doc <- mp_directions(origin, destination ,alternatives = TRUE,
-                       key = 'AIzaSyAXvkJsyLxLxWLcnImVsMnOoiZJjbcIBYA')
+  doc <- mp_directions(origin, destination ,alternatives = TRUE)
   route = mp_get_routes(doc)
   min_route = route[route[['alternative_id']] ==1, ]
   return( min_route)
