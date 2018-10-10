@@ -32,7 +32,8 @@ Sys.time()
 
 
 test<-fread("data/2016_01_new.csv", header = T, stringsAsFactors = F)
-test <- test %>% select(-PULocationID, -DOLocationID) %>% mutate_if(is.numeric, round, 4) %>% 
+test <- test %>% select(-PULocationID, -DOLocationID) %>% subset(((test$dropoff_longitude != 0) & (test$dropoff_latitude != 0) ) |
+  ( (test$pickup_longitude != 0) & (test$pickup_latitude != 0))) %>% mutate_if(is.numeric, round, 4) %>% 
   mutate(pickup_time = format(strptime(tpep_pickup_datetime, "%m/%d/%Y %I:%M:%S %p"), format = "%H:%M"), 
          dropoff_time = format(strptime(tpep_dropoff_datetime, "%m/%d/%Y %I:%M:%S %p"), format = "%H:%M")) %>% 
   select(-tpep_pickup_datetime, -tpep_dropoff_datetime)
