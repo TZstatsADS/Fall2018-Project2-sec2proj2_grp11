@@ -60,5 +60,5 @@ drawDrivingSpeed <- function(data, currentDate_time){
        ylab = "Value", xlab = 'Time',xaxt='n', main = 'Driving Speed vs Tip Amount')
   lines(one_data.summary2$mean_tip, col = 'red' )
   axis(1,at=seq(1,length(times), by = 6),labels=times[seq(1,length(times), by = 6)])
-  legend("topright", legend = c('Speed (miles/min)','Tip'), col = c('blue', 'red'), lty=1:2, cex=0.8)
+  legend("topright", legend = c('Speed (miles/min)','Tip (proportion)'), col = c('blue', 'red'), lty=1:2, cex=0.8)
 }
