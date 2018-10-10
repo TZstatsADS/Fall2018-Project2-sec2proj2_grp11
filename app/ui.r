@@ -41,12 +41,15 @@ navbarPage("NYC TAXI", id="nav",
                                   draggable = TRUE, top = 60, left = 20, right = "auto", bottom = "auto",
                                   width = 330, height = "auto",
                                   
-                                  h2("Taxi Helper: Help you to get taxi easier"),
+                                  h2("Where To Go: Get a Taxi!"),
                                   actionButton("geoloc", "Localize me", class="btn btn-primary", onClick="shinyjs.geoloc()"),
                                   timeInput("time", "Time:", value = Sys.time()),
-                                  actionButton("begin_searching", "Searching neighbors"),
-                                  helpText("Click Localize me button to localize myself"),
-                                  helpText("Click Searching button to begin searching neighborhood taxis")
+                                  actionButton("begin_searching", "Search Neighbor"),
+                                  actionButton("delete1", "Clean",value=FALSE),
+                                  helpText("Click Localize me button to localize yourself"),
+                                  helpText("Click on the map to show where you are"),
+                                  helpText("Click Search Neighbor button to begin searching the neighborhood taxi"),
+                                  helpText("Click Clean button to clean the map")
                     )
                     # datetime input & click, 1.5h
                     # Ref: https://leafletjs.com/examples/quick-start/
@@ -54,6 +57,11 @@ navbarPage("NYC TAXI", id="nav",
                     # get the lati and log of clicked point(server) 
                     # pass the geo info to a variable (server)
                     
+                    # sidebarLayout(
+                    #   sidebarPanel(
+                    #     checkboxInput("delete1", "Delete ID=1 and 2",value=FALSE),
+                    #     checkboxInput("delete3", "Delete ID=3",value=FALSE)
+                    #   )
                     
                     # give a popped up for the geo info of the point you clicked 
                     # (popped out in ui, poped up text in server)

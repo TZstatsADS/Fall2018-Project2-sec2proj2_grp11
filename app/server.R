@@ -22,7 +22,7 @@ library(data.table)
 
 setwd("~/Documents/Github/ADS/Fall2018-Project2-sec2_proj2_grp11/") ############
 
-test01<-fread("test01.csv", header = T, stringsAsFactors = F)
+test01<-fread("test01_sam.csv", header = T, stringsAsFactors = F)
 
 count <- NULL
 
@@ -91,8 +91,8 @@ shinyServer(function(input, output,session) {
         subset(( (abs(pickup_longitude-lng) < 0.0001 
                   & abs(pickup_latitude - lat) < 0.0001)) | ((abs(dropoff_longitude-lng) < 0.0001 
                                                               & abs(dropoff_latitude - lat) < 0.0001 )) ) %>%
-        subset( (abs(minute(hm(pickup_time) - hm(time))) <= 15)  | 
-                  (abs(minute(hm(dropoff_time) - hm(time))) <= 15) )
+        subset( (abs(lubridate::minute(hm(pickup_time) - hm(time))) <= 15)  | 
+                  (abs(lubridate::minute(hm(dropoff_time) - hm(time))) <= 15) )
       
       count <- nrow(temp_taxi_data)
       print(as.character(paste("count1", count, sep = ":")))
@@ -106,11 +106,11 @@ shinyServer(function(input, output,session) {
                                             popup = content) 
       } else {
         temp_taxi_data <- test01 %>% 
-          subset(( (abs(pickup_longitude-lng) < 0.0007 
-                    & abs(pickup_latitude - lat) < 0.0007)) | ((abs(dropoff_longitude-lng) < 0.0007 
-                                                                & abs(dropoff_latitude - lat) < 0.0007 )) ) %>%
-          subset( (abs(minute(hm(pickup_time) - hm(time))) <= 15)  | 
-                    (abs(minute(hm(dropoff_time) - hm(time))) <= 15) )
+          subset(( (abs(pickup_longitude-lng) < 0.0005 
+                    & abs(pickup_latitude - lat) < 0.0005)) | ((abs(dropoff_longitude-lng) < 0.0005 
+                                                                & abs(dropoff_latitude - lat) < 0.0005 )) ) %>%
+          subset( (abs(lubridate::minute(hm(pickup_time) - hm(time))) <= 15)  | 
+                    (abs(lubridate::minute(hm(dropoff_time) - hm(time))) <= 15) )
         
         count <- nrow(temp_taxi_data)
         print(as.character(paste("count2", count, sep = ":")))
@@ -121,10 +121,49 @@ shinyServer(function(input, output,session) {
                                                   popup = content) 
       }
       
-      
+    }
+    
+    
+
+
+    observeEvent(input$delete1, {
+      leafletProxy('map3') %>% removeMarker(as.character(1:label_marker(input$time, input$map3_click)))
+      }
+    )
+
+
+    label_marker <- function(current_time, click_event){
+      lat = round(as.numeric(click_event$lat), 4)
+      lng = round(as.numeric(click_event$lng), 4)
+
+      time = format(current_time, format = "%H:%M")
+
+      # select the data points
+      temp_taxi_data <- test01 %>%
+        subset(( (abs(pickup_longitude-lng) < 0.0001
+                  & abs(pickup_latitude - lat) < 0.0001)) | ((abs(dropoff_longitude-lng) < 0.0001
+                                                              & abs(dropoff_latitude - lat) < 0.0001 )) ) %>%
+        subset( (abs(lubridate::minute(hm(pickup_time) - hm(time))) <= 15)  |
+                  (abs(lubridate::minute(hm(dropoff_time) - hm(time))) <= 15) )
+
+      count <- nrow(temp_taxi_data)
+      # pop up generation
+      if (count > 5) {
+        return(count)
+      } else {
+        temp_taxi_data <- test01 %>%
+          subset(( (abs(pickup_longitude-lng) < 0.0005
+                    & abs(pickup_latitude - lat) < 0.0005)) | ((abs(dropoff_longitude-lng) < 0.0005
+                                                                & abs(dropoff_latitude - lat) < 0.0005 )) ) %>%
+          subset( (abs(lubridate::minute(hm(pickup_time) - hm(time))) <= 15)  |
+                    (abs(lubridate::minute(hm(dropoff_time) - hm(time))) <= 15) )
+
+        count <- nrow(temp_taxi_data)
+        return(count)
+      }
     }
 
-    
+
 
   
 })

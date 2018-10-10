@@ -47,3 +47,19 @@ write.csv(file = "test01.csv", x = test)
  
 
 
+sample_data <- test01[sample(1:10762386, 1076238, replace = FALSE, prob = NULL), ]
+write.csv(file = "test01_sam.csv", x = sample_data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

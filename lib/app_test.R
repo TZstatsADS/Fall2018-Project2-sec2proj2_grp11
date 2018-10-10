@@ -28,6 +28,8 @@ server <- shinyServer(function(input, output, session) {
     }
   })
   
+
+  
   observeEvent(input$delete3, {
     proxy <- leafletProxy('map')
     if (input$delete3){ proxy %>% removeMarker("3")}
