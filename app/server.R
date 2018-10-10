@@ -20,9 +20,9 @@ library(dplyr)
 library(data.table)
 
 
-setwd("~/Documents/Github/ADS/Fall2018-Project2-sec2_proj2_grp11/") ############
+# setwd("~/Documents/Github/ADS/Fall2018-Project2-sec2_proj2_grp11/") ############
 
-test01<-fread("test01_sam.csv", header = T, stringsAsFactors = F)
+test01<-fread("../data/test01_sam.csv", header = T, stringsAsFactors = F)
 
 count <- NULL
 
@@ -54,9 +54,8 @@ shinyServer(function(input, output,session) {
     ##### popup function #######
     observe({
       ## popup event observer
-      proxy <- leafletProxy("map3") %>% clearPopups()
+      leafletProxy("map3") %>% clearPopups()
       event <- input$map3_click
-      proxy %>% removeMarker(as.character(count))
       
       if (is.null(event))
         return()
@@ -66,9 +65,9 @@ shinyServer(function(input, output,session) {
     }) 
     
     showZipcodePopup <- function(lat, lng) {
-      content = as.character(paste(lat, lng, sep = ","))
+      content = "where I am"
       #print(content)
-      leafletProxy("map3") %>% removeMarker(as.character(count)) %>% addPopups(lat = lat, lng = lng, popup = content)
+      leafletProxy("map3") %>% addPopups(lat = lat, lng = lng, popup = content)
     }
     
     ######### search neignborhood part ######

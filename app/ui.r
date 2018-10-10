@@ -41,7 +41,7 @@ navbarPage("NYC TAXI", id="nav",
                                   draggable = TRUE, top = 60, left = 20, right = "auto", bottom = "auto",
                                   width = 330, height = "auto",
                                   
-                                  h2("Where To Go: Get a Taxi!"),
+                                  h2("Head Where to Get a Taxi?"),
                                   actionButton("geoloc", "Localize me", class="btn btn-primary", onClick="shinyjs.geoloc()"),
                                   timeInput("time", "Time:", value = Sys.time()),
                                   actionButton("begin_searching", "Search Neighbor"),
