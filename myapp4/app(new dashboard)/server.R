@@ -133,7 +133,7 @@ shinyServer(function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%
       #addTiles() %>%
-      setView(lat=40.75241, lng=-73.99961, zoom=11) %>%
+      setView(lat=40.76241, lng=-73.98961, zoom=11) %>%
       addProviderTiles('CartoDB.DarkMatter')
     # check provider choices: https://leaflet-extras.github.io/leaflet-providers/preview/
   })  # End of output$map
@@ -164,8 +164,64 @@ shinyServer(function(input, output, session) {
                  color="#ffa500", stroke = TRUE, fillOpacity = 0.8)
   }) # End of  observe
   
+  sub.data2 <- reactive({
+    # choose the subdata which taxi is currently on trip
+    begin <- as.POSIXct(paste(unlist(strsplit(input$selectDate, ' '))[1], "00:00:00", sep = ' ')) 
+    end <- as.POSIXct(paste(unlist(strsplit(input$selectDate, ' '))[1], "23:59:59", sep = ' '))
+    
+    return(week_data[(week_data$tpep_pickup_datetime >= begin) & 
+                       (week_data$tpep_pickup_datetime<= end) &
+                       (week_data$tpep_dropoff_datetime <= end), ])
+    
+    
+  })
+  
+  output$histPlot1 <- renderPlot({
+    subdata2 <- sub.data2()
+    
+    #Extract Time
+    subdata2$hour = hour(subdata2$tpep_pickup_datetime) + minute(subdata2$tpep_pickup_datetime)/60 + second(subdata2$tpep_pickup_datetime)/3600
+    
+    #Create Bins
+    bins=c(paste0(rep(c(paste0(0,0:9),10:23), each=4),".", c("00",25,50,75))[-1],"24:00")
+    
+    #Divide Data Into Bins
+    subdata2$bins = cut(subdata2$hour, breaks=seq(0, 24, 0.25), labels=bins)
+    
+    #Reformat to Numeric
+    subdata2$bins <- as.numeric(as.character(subdata2$bins))
+    
+    #Histogram
+    hist(subdata2$bins)
+    
+    #With ggplot
+    library(ggplot2)
+    ggplot(subdata2, aes(bins)) +
+      geom_histogram(color = '#337ab7', fill="#337ab7", alpha=0.5) +
+      xlab('Hour of Day') + 
+      labs(title = "Taxi Demand Histogram")
+  })
   
   
+  
+  output$histPlot2 <- renderPlot({
+    subdata2 <- sub.data2()
+    one_data <- subdata2[,c('tpep_dropoff_datetime', 'speed_milesPerMin')]
+    one_data$speed_milesPerMin <- round(one_data$speed_milesPerMin*60, 2)  # miles/hour
+    one_data$tpep_dropoff_datetime <- as.POSIXct(one_data$tpep_dropoff_datetime)
+    
+    one_data.summary = one_data %>% group_by(by3=cut(tpep_dropoff_datetime, "3 min")) %>%
+      summarise(mean_speed =mean(speed_milesPerMin)) %>% as.data.frame
+    
+    times <- format(strptime(one_data.summary$by3, "%Y-%m-%d %H:%M:%S"), "%H:%M")
+
+    plot(one_data.summary$mean_speed, type = 'l', col = 'tan3',
+         ylab = "Speed (miles/hour)", xlab = 'Time',xaxt='n', main = 'Learning Traffic From Driving Speed')
+    axis(1,at=seq(1,length(times), by = 6),labels=times[seq(1,length(times), by = 6)])
+
+  })
+  
+
   output$taxibox <- renderInfoBox(
     {
       sub_data <- sub.data()

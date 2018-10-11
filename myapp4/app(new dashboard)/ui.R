@@ -18,6 +18,7 @@ library(flexdashboard)
 library(leaflet)
 library(googleVis)
 library(plotly)
+library(rgdal)
 
 shinyUI(
   dashboardPage(
@@ -71,13 +72,20 @@ shinyUI(
                        infoBoxOutput("meanSpeedbox"),
                        infoBoxOutput("meanDurationbox")), # fluidRow1
 
-              box(
-                title = "On-Trip NYC Yellow Taxi",
-                collapsible = TRUE,
-                width = "100%",
-                height = "100%",
-                leafletOutput("map")
-              ) # end of box
+              fluidRow(column(8,
+                              box(
+                                title = "On-Trip NYC Yellow Taxi",
+                                collapsible = TRUE,
+                                width = "100%",
+                                height = "100%",
+                                leafletOutput("map",width = "100%", height = 550)) # end of box
+                              ), 
+                       
+                       column(4,plotOutput('histPlot1',height = "310px"),plotOutput('histPlot2',height = "300px")
+                              
+                     )
+              )# fluidRow2
+
               
       )# end of Taxi_animation tab 
       
