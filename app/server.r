@@ -3,7 +3,9 @@ packages.used=c("shiny","leaflet","readr","DT",
                 "measurements","geosphere",
                 "shinyjs", "dplyr","shinydashboard",
                 "googleVis","corrplot","flexdashboard",
-                "rgdal","geojsonio","gridExtra","plotly")
+                "rgdal","geojsonio","gridExtra","plotly",
+                "mapsapi", "xml2",'data.table',"fasttime",
+                'maptools', 'reshape2','ggplot2')
 
 # check packages that need to be installed.
 packages.needed=setdiff(packages.used,
@@ -15,49 +17,12 @@ if(length(packages.needed)>0){
 }
 
 #load libraries
-library(shiny)
-library(leaflet)
-library(readr)
-library(DT)
-library(lubridate)
-library(ggmap)
-library(googleway)
-library(measurements)
-library(geosphere)
-library(shinyjs)
-library(dplyr)
-library(shinydashboard)
-library(googleVis)
-library(corrplot)
-library(flexdashboard)
-library(rgdal)
-library(geojsonio)
-library(gridExtra)
-library(plotly)
-
-#install.packages("RGraphics")
-#install.packages("gridExtra")
-
-packages.used=c("mapsapi", "xml2", "leaflet", "shiny",'data.table',"fasttime",'ggmap','dplyr',
-                'maptools','plotly', 'reshape2','shinydashboard','ggplot2','flexdashboard','rgdal',
-                'lubridate','geojsonio','gridExtra')
-
-# check packages that need to be installed.
-packages.needed=setdiff(packages.used, 
-                        intersect(installed.packages()[,1], 
-                                  packages.used))
-# install additional packages
-if(length(packages.needed)>0){
-  install.packages(packages.needed, dependencies = TRUE)
-}
-
-library(mapsapi); library(xml2); library(data.table)
-library(fasttime); library(dplyr); library(ggmap)
-library(maptools); library(plotly); library(leaflet)
-library(shiny); library(reshape2); library(shinydashboard)
-library(ggplot2); library(flexdashboard); library(rgdal)
-library(lubridate); library(geojsonio); library(gridExtra)
-source("functions.R")
+library(shiny);library(leaflet);library(readr);library(DT);library(lubridate);
+library(ggmap);library(googleway);library(measurements);library(geosphere)
+library(shinyjs);library(dplyr);library(shinydashboard);library(googleVis)
+library(corrplot);library(flexdashboard);library(rgdal);library(geojsonio)
+library(gridExtra);library(plotly);library(mapsapi);library(xml2);library(data.table)
+library(fasttime);library(maptools);library(reshape2);library(ggplot2)
 
 ##########Load all the RData file 
 load('../output/meanFarePerDistance.RData')
@@ -129,13 +94,6 @@ shinyServer(function(input, output, session) {
     t00
   })
 
-
-  # Simulate work being done for 3 seconds
-  # Sys.sleep(3)
-
-  # Hide the loading message when the rest of the server function has executed
-  # hide(id = "loading-content", anim = TRUE, animType = "fade")
-  # show("app-content")
 
   #reactive google direction dataframe(list)
   df = reactive({
@@ -522,7 +480,7 @@ shinyServer(function(input, output, session) {
     par(mfrow = c(1,1),mar=c(4, 4, 3.5, 1))
 
     plot(one_data.summary$mean_speed, type = 'l', col = 'blue',
-         ylab = "Value", xlab = 'Time',xaxt='n', main = 'Driving Speed vs Tip Amount')
+         ylab = "Value", xlab = 'Time',xaxt='n', main = 'Driving Speed vs Tip Proportion', ylim = c(0.1,0.55))
     lines(one_data.summary2$mean_tip, col = 'red' )
     axis(1,at=seq(1,length(times), by = 6),labels=times[seq(1,length(times), by = 6)])
     legend("topright", legend = c('Speed (miles/min)','Tip'), col = c('blue', 'red'), lty=1:2, cex=0.8)

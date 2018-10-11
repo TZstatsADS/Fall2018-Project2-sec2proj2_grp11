@@ -3,7 +3,9 @@ packages.used=c("shiny","leaflet","readr","DT",
                 "measurements","geosphere",
                 "shinyjs", "dplyr","shinydashboard",
                 "googleVis","corrplot","flexdashboard",
-                "rgdal","geojsonio","gridExtra","plotly")
+                "rgdal","geojsonio","gridExtra","plotly",
+                "mapsapi", "xml2",'data.table',"fasttime",
+                'maptools', 'reshape2','ggplot2')
 
 # check packages that need to be installed.
 packages.needed=setdiff(packages.used,
@@ -15,49 +17,12 @@ if(length(packages.needed)>0){
 }
 
 #load libraries
-library(shiny)
-library(leaflet)
-library(readr)
-library(DT)
-library(lubridate)
-library(ggmap)
-library(googleway)
-library(measurements)
-library(geosphere)
-library(shinyjs)
-library(dplyr)
-library(shinydashboard)
-library(googleVis)
-library(corrplot)
-library(flexdashboard)
-library(rgdal)
-library(geojsonio)
-library(gridExtra)
-library(plotly)
-
-#install.packages("RGraphics")
-#install.packages("gridExtra")
-
-packages.used=c("mapsapi", "xml2", "leaflet", "shiny",'data.table',"fasttime",'ggmap','dplyr',
-                'maptools','plotly', 'reshape2','shinydashboard','ggplot2','flexdashboard','rgdal',
-                'lubridate','geojsonio','gridExtra')
-
-# check packages that need to be installed.
-packages.needed=setdiff(packages.used, 
-                        intersect(installed.packages()[,1], 
-                                  packages.used))
-# install additional packages
-if(length(packages.needed)>0){
-  install.packages(packages.needed, dependencies = TRUE)
-}
-
-library(mapsapi); library(xml2); library(data.table)
-library(fasttime); library(dplyr); library(ggmap)
-library(maptools); library(plotly); library(leaflet)
-library(shiny); library(reshape2); library(shinydashboard)
-library(ggplot2); library(flexdashboard); library(rgdal)
-library(lubridate); library(geojsonio); library(gridExtra)
-
+library(shiny);library(leaflet);library(readr);library(DT);library(lubridate);
+library(ggmap);library(googleway);library(measurements);library(geosphere)
+library(shinyjs);library(dplyr);library(shinydashboard);library(googleVis)
+library(corrplot);library(flexdashboard);library(rgdal);library(geojsonio)
+library(gridExtra);library(plotly);library(mapsapi);library(xml2);library(data.table)
+library(fasttime);library(maptools);library(reshape2);library(ggplot2)
 
 shinyUI(
   dashboardPage(
@@ -65,11 +30,8 @@ shinyUI(
     
     dashboardSidebar(
       
-      #sliderInput("Month",label = "Choose Month:",min=1,max=6, value=1, animate=T),
-      
-      
       sidebarMenu(
-        menuItem("Take a Taxi", tabName = "maptab"),
+        menuItem("Hail a Taxi", tabName = "maptab", icon = icon("map-marker", lib = "glyphicon"), badgeColor='light-blue'),
         menuItem("Taxis Fare Borough Stats", tabName = "taxis_fare", icon = icon("dollar"), badgeColor='light-blue'),
         menuItem("Taxi Animation", tabName = "taxi_animation", icon = icon("taxi"), badgeColor='light-blue')
         
@@ -78,9 +40,6 @@ shinyUI(
       selectInput("selectDate", "Choose Animation Date", 
                   c("2016-01-04 Mon","2016-01-05 Tues","2016-01-06 Wed",
                     "2016-01-07 Thur","2016-01-08 Fri","2016-01-09 Sat","2016-01-10 Sun")),
-      
-      #selectInput("selectSpeed", "Choose Animation Speed", 
-      #            c("1X","2X","3X","4X")),
       
       sliderInput("time_range", 
                   "Choose Time Range:", 
@@ -141,8 +100,8 @@ shinyUI(
                                   #indicate whether or not to show past routes of the taxis
                                   checkboxInput(inputId = "showroutes", label = "Show past routes", value = FALSE),
                                   #indicate whether or not to show the walking routes to the drop-off locations
-                                  checkboxInput(inputId = "showwalk", label = "Show walking routes", value = FALSE),
-                                  submitButton(text = "Search")
+                                  checkboxInput(inputId = "showwalk", label = "Show walking routes", value = FALSE)
+                                  # submitButton(text = "Search")
                     ),
 
 
@@ -204,16 +163,10 @@ shinyUI(
                 )
                 )# fluidRow2
                 
-                
         )# end of Taxi_animation tab
-        
-        
-        
-        
+
       )# end of tab items
-      
-      
-      
+
       # other tabItems to be added
       
     )# end of dashboardBody
