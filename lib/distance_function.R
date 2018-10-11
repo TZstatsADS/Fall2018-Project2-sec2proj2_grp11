@@ -18,3 +18,5 @@ calc_geo_distance2 = function(long1, lat1, long2, lat2, units = "km") {
   }
   distance
 }
+
+
