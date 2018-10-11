@@ -30,24 +30,27 @@ shinyUI(
     
     dashboardSidebar(
       
-      sidebarMenu(
-        menuItem("Hail a Taxi", tabName = "maptab", icon = icon("map-marker", lib = "glyphicon"), badgeColor='light-blue'),
-        menuItem("Taxis Fare Borough Stats", tabName = "taxis_fare", icon = icon("dollar"), badgeColor='light-blue'),
-        menuItem("Taxi Animation", tabName = "taxi_animation", icon = icon("taxi"), badgeColor='light-blue')
-        
+      sidebarMenu(id="menu1",
+                  menuItem("Hail a Taxi", tabName = "maptab", icon = icon("map-marker", lib = "glyphicon"), badgeColor='light-blue'),
+                  menuItem("Taxis Fare Borough Stats", tabName = "taxis_fare", icon = icon("dollar"), badgeColor='light-blue'),
+                  menuItem("Taxi Animation", tabName = "taxi_animation", icon = icon("taxi"), badgeColor='light-blue')
+                  
       ), # End of sidebarMenu 
       
-      selectInput("selectDate", "Choose Animation Date", 
-                  c("2016-01-04 Mon","2016-01-05 Tues","2016-01-06 Wed",
-                    "2016-01-07 Thur","2016-01-08 Fri","2016-01-09 Sat","2016-01-10 Sun")),
+      conditionalPanel(
+        condition = "input.menu1 == 'taxi_animation'",
+        selectInput("selectDate", "Choose Animation Date", 
+                    c("2016-01-04 Mon","2016-01-05 Tues","2016-01-06 Wed",
+                      "2016-01-07 Thur","2016-01-08 Fri","2016-01-09 Sat","2016-01-10 Sun")),
+        
+        sliderInput("time_range", 
+                    "Choose Time Range:", 
+                    min = as.POSIXct("2016-01-04 00:00:00"),
+                    max = as.POSIXct("2016-01-04 23:59:59"),
+                    value = c(as.POSIXct("2016-01-04 00:00:00")),
+                    timeFormat = "%F %T", ticks = F, animate = animationOptions(interval=450, loop = T),
+                    timezone = 'GMT', step = 60*2))
       
-      sliderInput("time_range", 
-                  "Choose Time Range:", 
-                  min = as.POSIXct("2016-01-04 00:00:00"),
-                  max = as.POSIXct("2016-01-04 23:59:59"),
-                  value = c(as.POSIXct("2016-01-04 00:00:00")),
-                  timeFormat = "%F %T", ticks = F, animate = animationOptions(interval=450, loop = T),
-                  timezone = 'GMT', step = 60*2)
     ), # End of dashboardSidebar
     
     
@@ -86,7 +89,7 @@ shinyUI(
                                   #input past time period to show drop-off locations
                                   numericInput(inputId = "nextmin",
                                                label = "Show drop-off locations in the next minute(s)",
-                                               value = 5, min = 1, max = 10),
+                                               value = 3, min = 1, max = 5),
                                   div("Larger yellow icons indicate sooner arrival.", style = "color:blue"),
                                   br(),
 
@@ -109,9 +112,9 @@ shinyUI(
                                   draggable = FALSE,top = "auto", left = 0, right = "auto", bottom = 0,
                                   width = 320, height = "auto",
 
-                                  h3("Current Time",
-                                     textOutput(outputId = "currentTime")
-                                  ),
+                                  # h3("Current Time",
+                                  #    textOutput(outputId = "currentTime")
+                                  # ),
 
                                   strong(
                                     #output google estimated distance
@@ -125,7 +128,8 @@ shinyUI(
                                     # textOutput(outputId = "rtloc")
                                   ),
 
-                                  p("(Estimated from last 30 mins fare rate)"),
+                                  textOutput(outputId = "notes"),
+                                  # p("(Estimated from last 30 mins fare rate)"),
 
                                   plotOutput('plotDrivingSpeed', height=200)
                     )

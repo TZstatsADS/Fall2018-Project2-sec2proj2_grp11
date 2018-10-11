@@ -192,14 +192,14 @@ shinyServer(function(input, output, session) {
   })
 
   #show system time
-  output$currentTime <- renderText({
-    # invalidateLater causes this output to automatically
-    # become invalidated when input$interval milliseconds
-    # have elapsed
-    invalidateLater(1000, session)
-
-    format(Sys.time(),"%H:%M:%S")
-  })
+  # output$currentTime <- renderText({
+  #   # invalidateLater causes this output to automatically
+  #   # become invalidated when input$interval milliseconds
+  #   # have elapsed
+  #   invalidateLater(1000, session)
+  # 
+  #   format(Sys.time(),"%H:%M:%S")
+  # })
 
 
   #output fare esmitation
@@ -237,6 +237,10 @@ shinyServer(function(input, output, session) {
       " Estimated Fare amount: "
     } else
       paste(" Estimated Fare amount: $",ifelse(is.na(do),0,round(do,2)), sep = "")
+  })
+  
+  output$notes = renderText({
+    "(Estimated from last 30 mins fare rate)"
   })
 
   #output google distance estimation
@@ -414,7 +418,7 @@ shinyServer(function(input, output, session) {
                        lng = within_circle$dropoff_longitude[i],
                        icon = ic,
                        popup = paste(paste("drop-off time: ",wc_time[i]),
-                                     paste("(arriving in ",time_diff_in_min[i]," ", plural[i], ")"),
+                                     # paste("(arriving in ",time_diff_in_min[i]," ", plural[i], ")"),
                                      paste("walking time: ", walk_time),
                                      paste("walking distance: ", w_d),
                                      sep = "<br/>"))
