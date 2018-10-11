@@ -2,7 +2,7 @@
 #install.packages("gridExtra")
 
 packages.used=c("mapsapi", "xml2", "leaflet", "shiny",'data.table',"fasttime",'ggmap','dplyr',
-                'maptools','plotly', 'reshape2','shinydashboard','ggplot2','flexdashboard','rgal',
+                'maptools','plotly', 'reshape2','shinydashboard','ggplot2','flexdashboard','rgdal',
                 'lubridate','geojsonio','gridExtra')
 
 # check packages that need to be installed.
@@ -68,18 +68,18 @@ shinyServer(function(input, output, session) {
     return(month_fare_neighbor_new)
   })
   
-
+  
   output$plot1 <- renderPlot({
     mymonth = c("January","Febrary","March","April","May","June","July","September","October","November","December")
     text <- mymonth[input$Month]
     if(input$Month <= 6){
-      p <- barplot(as.vector(borough_final[,input$Month]),ylim=c(0,45000),main=paste("Number of pick-ups in", text),xlab="Boroughs",ylab="Counts",names.arg=c("Manhattan","Brooklyn","Queens","Bronx","Staten Island"),col="pink")
-      text(p,as.vector(borough_final[,input$Month])+10*sign(as.vector(borough_final[,input$Month])),labels=as.vector(borough_final[,input$Month]),xpd=TRUE)
-    }
+      df <- data.frame(count=as.vector(borough_final[,input$Month]),borough=c("Manhattan","Brooklyn","Queens","Bronx","Staten Island"))
+      ggplot(df,aes(x=borough,y=count,fill=borough))+geom_bar(colour="black",stat="identity")}
     else{
       barplot(0,main=paste("No Data Available For",text))
     }
   })
+  
   output$plot2 <- renderPlot({
     mymonth = c("January","Febrary","March","April","May","June","July","September","October","November","December")
     text <- mymonth[input$Month]
@@ -145,7 +145,7 @@ shinyServer(function(input, output, session) {
                       min = as.POSIXct(paste(unlist(strsplit(input$selectDate, ' '))[1], "00:00:00", sep = ' ')),
                       max = as.POSIXct(paste(unlist(strsplit(input$selectDate, ' '))[1], "23:59:59", sep = ' ')),
                       value = c(as.POSIXct(paste(unlist(strsplit(input$selectDate, ' '))[1], "00:00:00", sep = ' ')))
-                      )
+    )
   })
   
   
@@ -214,14 +214,14 @@ shinyServer(function(input, output, session) {
       summarise(mean_speed =mean(speed_milesPerMin)) %>% as.data.frame
     
     times <- format(strptime(one_data.summary$by3, "%Y-%m-%d %H:%M:%S"), "%H:%M")
-
+    
     plot(one_data.summary$mean_speed, type = 'l', col = 'tan3',
          ylab = "Speed (miles/hour)", xlab = 'Time',xaxt='n', main = 'Learning Traffic From Driving Speed')
     axis(1,at=seq(1,length(times), by = 6),labels=times[seq(1,length(times), by = 6)])
-
+    
   })
   
-
+  
   output$taxibox <- renderInfoBox(
     {
       sub_data <- sub.data()
@@ -248,7 +248,7 @@ shinyServer(function(input, output, session) {
   )
   
   
- 
+  
 })
 
 
