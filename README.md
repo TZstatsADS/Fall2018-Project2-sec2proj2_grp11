@@ -23,11 +23,12 @@ Term: Fall 2018
 
 + **Contribution statement**: All team members contributed to the GitHub repository and prepared for the presentation. All team members were actively involved in all stages of this project and helped design the app. All team members approve of the work presented in our GitHub repository including this contribution statement.
 
- + Huiming Xie: Project Leader. 
+ + Huiming Xie: Project Leader. Main contributor of the “hail a taxi” panel. Coordinated and combined ideas of group members. Organized and merged code written by different members. Actively communicated with group members to push forward progress of the project 
  + Siyu Zhu: Preprocessed data. Designed ui and server to localized passenger, and to mark the neighboring taxi on the map. Organized Github. Presentate in class. 
- + Wening Yu: 
- + Fangqi Ouyang: 
- + Izzy Beers:
+ + Wening Yu: Designed  dashboard
+ + Fangqi Ouyang: Designed taxi borough statistics dashboard
+ + Izzy Beers: Randomly subsetted data from 100 million rows per month to 80,000 rows per month, for a total dataset size of about one million rows, to make processing easier in R.  Created function to tell you where exactly taxis usually drop people off near your location, at that time of day, so you can find the best place to wait for a taxi.
+
 
 
 
