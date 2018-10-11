@@ -1,0 +1,47 @@
+# Project 2: Shiny App_Hi Taxi!
+####Project Description
+In this second project of GR5243 Applied Data Science, we developed a shiny app on the topic of **where and whether to get a taxi** using [2016 Yellow Taxi Trip Data](https://data.cityofnewyork.us/Transportation/2016-Yellow-Taxi-Trip-Data/k67s-dv2t) from [NYC Open Data](https://opendata.cityofnewyork.us/). See [Project 2 Description](doc/project2_desc.md) for more details.  
+![screenshot](doc/figure1.png)
+
+##Hi Taxi! App
+Term: Fall 2018
+
++ Team #11
++ **Project Title:** Hi Taxi!
+ + App [Link](https://siyuzhu5.shinyapps.io/NY_Taxi_Helper/)
+ + Team Members
+	+ Huiming Xie
+	+ Wening Yu
+	+ Fangqi Ouyang
+	+ Izzy Beers
+	+ Siyu Zhu (Presentator)
+
++ **Project summary**: "Where to go to get a taxi?" is always a problem faced by people who want to get a cab, especially when there is no uber around. 
+
+ Given your current location, our app Hi Taxi! can show you neighboring taxi which will drop off in the following few minutes based on the past records. Besides this, Hi Taxi! will also present you with the optimal taxi route from your location to your destination, along with the estimated distance, duration and fare amount. It will also provide the public trasit duration for your reference.
+
++ **Contribution statement**: All team members contributed to the GitHub repository and prepared for the presentation. All team members were actively involved in all stages of this project and helped design the app. All team members approve of the work presented in our GitHub repository including this contribution statement.
+
+ + Huiming Xie: Project Leader. 
+ + Siyu Zhu: Preprocessed data. Designed ui and server to localized passenger, and to mark the neighboring taxi on the map. Organized Github. Presentate in class. 
+ + Wening Yu: 
+ + Fangqi Ouyang: 
+ + Izzy Beers:
+
+
+
+
+
+Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
+
+```
+proj/
+├── app/
+├── lib/
+├── data/
+├── doc/
+└── output/
+```
+
+Please see each subfolder for a README file.
+
