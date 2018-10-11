@@ -191,17 +191,6 @@ shinyServer(function(input, output, session) {
     input$showwalk
   })
 
-  #show system time
-  # output$currentTime <- renderText({
-  #   # invalidateLater causes this output to automatically
-  #   # become invalidated when input$interval milliseconds
-  #   # have elapsed
-  #   invalidateLater(1000, session)
-  # 
-  #   format(Sys.time(),"%H:%M:%S")
-  # })
-
-
   #output fare esmitation
   output$fares = renderText({
 
@@ -407,7 +396,7 @@ shinyServer(function(input, output, session) {
           }
 
           for(j in 1:6){
-            if(time_diff_in_min[i]>=(2*j-2) & time_diff_in_min[i] < 2*j){
+            if(time_diff_in_min[i]==(j-1)){
               ic = yellowendIcon[[j]]
             }
           }
