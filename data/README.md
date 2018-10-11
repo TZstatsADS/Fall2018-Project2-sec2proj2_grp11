@@ -6,4 +6,4 @@ The data directory contains data used in the analysis. This is treated as read o
 
 Hi mates, this is the shared folder which contains the files split by months.  [GOOGLE DRIVE LINK](https://drive.google.com/drive/folders/1AP3j2TPjzugt7eGlh1fEGvLNBMuXF8fE?usp=sharing)
 
-Please unzip the "per201601xx.rar" into "per.csv201601xx" and "data201601xx.rar" into "data201601xx.csv" and put them in the folder "data" for the app.r to read.
+Please unzip the "per201601xx.rar" into "per.csv201601xx" and "data201601xx.rar" into "data201601xx.csv" and put them in the folder "data" for the app to read.
