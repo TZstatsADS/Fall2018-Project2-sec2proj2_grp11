@@ -9,7 +9,7 @@ Term: Fall 2018
 
 + Team #11
 + **Project Title:** Hi Taxi!
- + App [Link](https://siyuzhu5.shinyapps.io/NY_Taxi_Helper/)
+ + App [Link](https://judycom.shinyapps.io/yellowtaxinyc/)
  + Team Members
 	+ Huiming Xie
 	+ Wening Yu
@@ -40,10 +40,10 @@ Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by
 ```
 /
  app/
-îÄ lib/
+‚Äù‚Ç¨ lib/
  data/
-îÄ doc/
-îÄ output/
+‚Äù‚Ç¨ doc/
+‚Äù‚Ç¨ output/
 ```
 
 Please see each subfolder for a README file.
