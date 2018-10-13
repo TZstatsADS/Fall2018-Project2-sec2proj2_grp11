@@ -2,7 +2,9 @@
 ####Project Description
 
 In this second project of GR5243 Applied Data Science, we developed a shiny app on the topic of **where and whether to get a taxi** using [2016 Yellow Taxi Trip Data](https://data.cityofnewyork.us/Transportation/2016-Yellow-Taxi-Trip-Data/k67s-dv2t) from [NYC Open Data](https://opendata.cityofnewyork.us/). See [Project 2 Description](doc/project2_desc.md) for more details.  
-![screenshot](doc/figure1.png)
+![screenshot1](doc/figs/pg1.png)
+![screenshot2](doc/figs/pg2.png)
+![screenshot3](doc/figs/pg3.png)
 
 ##Hi Taxi! App
 Term: Fall 2018
