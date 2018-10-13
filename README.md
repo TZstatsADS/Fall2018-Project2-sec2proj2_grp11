@@ -10,21 +10,23 @@ Term: Fall 2018
 + Team #11
 + **Project Title:** Hi Taxi!
  + App [Link](https://judycom.shinyapps.io/yellowtaxinyc/)
+ (Due to the huge size of the data files, it may be slow for the app the read in and display. To use the app, please download or clone the master branch and unzip all the data files in the folder "data". It may also take a while for the map screen to display also because of the size of the data. We once tried to sample the data and obtain only a subset of them, but that would result in an effect not quite credible, i.e. showing too few taxi drop-off points in a certain sphere and in a certain time period, for example, in 0.2 miles in the next 5 minutes.
+ 
  + Team Members
 	+ Huiming Xie
 	+ Wening Yu
 	+ Fangqi Ouyang
 	+ Izzy Beers
-	+ Siyu Zhu (Presentator)
+	+ Siyu Zhu (Presenter)
 
 + **Project summary**: "Where to go to get a taxi?" is always a problem faced by people who want to get a cab, especially when there is no uber around. 
 
- Given your current location, our app Hi Taxi! can show you neighboring taxi which will drop off in the following few minutes based on the past records. Besides this, Hi Taxi! will also present you with the optimal taxi route from your location to your destination, along with the estimated distance, duration and fare amount. It will also provide the public trasit duration for your reference.
+ Given your current location, our app Hi Taxi! can show you neighboring taxi which will drop off in the following few minutes based on the past records. Besides this, Hi Taxi! will also present you with the optimal taxi route from your location to your destination, along with the estimated distance, duration and fare amount. It will also provide the public trasit duration for your reference. Of course, since we only have the data for 2016, the drop-off locations are not real-time, but the functioning can be viewed from the app, and as long as the real-time data can be obtained for the current time, the app can provide great business value. And The 2nd and 3rd dashboards provide some summary statistics and overview of the data in different boroughs and different time points.
 
 + **Contribution statement**: All team members contributed to the GitHub repository and prepared for the presentation. All team members were actively involved in all stages of this project and helped design the app. All team members approve of the work presented in our GitHub repository including this contribution statement.
 
  + Huiming Xie: Project Leader. Main contributor of the "hail a taxi" panel. Coordinated and combined ideas of group members. Organized and merged code written by different members. Actively communicated with group members to push forward progress of the project 
- + Siyu Zhu: Preprocessed data. Designed ui and server to localized passenger, and to mark the neighboring taxi on the map. Organized Github. Presentate in class. 
+ + Siyu Zhu: Preprocessed data. Designed ui and server to localized passenger, and to mark the neighboring taxi on the map. Organized Github. Presented in class. 
  + Wening Yu: 1.Second contributor of the "hail a taxi" panel. Achieved functionalities included: click on map showing destination, enter or select destination and current location, visualize the route, designed functions to calculate estimated trip duration/ tip percent/ total fare/etc., rush hour plot design. 2.Taxi animation dashboard design and functionality implementation
 
  + Fangqi Ouyang: Designed taxi borough statistics dashboard
