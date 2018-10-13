@@ -103,8 +103,8 @@ shinyUI(
                                   #indicate whether or not to show past routes of the taxis
                                   checkboxInput(inputId = "showroutes", label = "Show past routes", value = FALSE),
                                   #indicate whether or not to show the walking routes to the drop-off locations
-                                  checkboxInput(inputId = "showwalk", label = "Show walking routes", value = FALSE),
-                                  actionButton(inputId = "search", label = "Search")
+                                  checkboxInput(inputId = "showwalk", label = "Show walking routes", value = FALSE)
+                                  # submitButton(text = "Search")
                     ),
 
 
@@ -132,7 +132,7 @@ shinyUI(
                                   # p("(Estimated from last 30 mins fare rate)"),
 
                                   plotOutput('plotDrivingSpeed', height=200)
-                           )
+                    )
                 )),
         
         tabItem(tabName = "taxis_fare",
