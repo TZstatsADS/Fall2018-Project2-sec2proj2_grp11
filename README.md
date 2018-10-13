@@ -10,7 +10,7 @@ Term: Fall 2018
 + Team #11
 + **Project Title:** Hi Taxi!
  + App [Link](https://judycom.shinyapps.io/yellowtaxinyc/)
- (Due to the huge size of the data files, it may be slow for the app the read in and display. To use the app, please download or clone the master branch and unzip all the data files in the folder "data". It may also take a while for the map screen to display also because of the size of the data. We once tried to sample the data and obtain only a subset of them, but that would result in an effect not quite credible, i.e. showing too few taxi drop-off points in a certain sphere and in a certain time period, for example, in 0.2 miles in the next 5 minutes.
+ (Due to the huge size of the data files, it may be slow for the app the read in and display. To use the app, please download or clone the master branch and unzip all the data files in the folder "data". It may also take a while for the map screen to display also because of the size of the data. We once tried to sample the data and obtain only a subset of them, but that would result in an effect not quite credible, i.e. showing too few taxi drop-off points in a certain sphere and in a certain time period, for example, in 0.2 miles in the next 5 minutes. Compared with the loading time at the beginning, we think the visualization effect is more important, so we decide to retain the original data, which may impair the shinyapp.io funtionality. 
  
  + Team Members
 	+ Huiming Xie
